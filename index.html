@@ -1,0 +1,242 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Login Screen -->
+    <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center">
+        <img src="https://storage.googleapis.com/a1aa/image/UohTtnCM0Mlc_PyHh_4Uxg7tXG0I-kmPpaVLOCqukI4.jpg" alt="One Card Logo" class="mb-8" width="100" height="50">
+        <p class="mb-4">Use 4-digit Password to Login</p>
+        <div class="flex space-x-2 mb-4">
+            <input type="password" id="pin1" maxlength="1" class="w-12 h-12 bg-gray-800 rounded text-center text-2xl">
+            <input type="password" id="pin2" maxlength="1" class="w-12 h-12 bg-gray-800 rounded text-center text-2xl">
+            <input type="password" id="pin3" maxlength="1" class="w-12 h-12 bg-gray-800 rounded text-center text-2xl">
+            <input type="password" id="pin4" maxlength="1" class="w-12 h-12 bg-gray-800 rounded text-center text-2xl">
+        </div>
+        <button class="text-blue-500 mb-4" onclick="showPassword()">Show Password</button>
+        <button class="text-blue-500 mb-2">Forgot Password?</button>
+        <button class="text-blue-500">Login using Fingerprint</button>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="hidden min-h-screen flex flex-col items-center justify-center">
+        <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex items-center justify-between mb-4">
+            <img src="https://storage.googleapis.com/a1aa/image/UohTtnCM0Mlc_PyHh_4Uxg7tXG0I-kmPpaVLOCqukI4.jpg" alt="One Card Logo" class="w-12 h-12" width="50" height="50">
+            <div class="text-right">
+                <p>Total Outstanding</p>
+                <p class="text-xl text-blue-500">₹14,609.36</p>
+                <p>Available Limit: ₹1,826.17</p>
+            </div>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">Payment Details</p>
+            <p class="text-xl text-blue-500">₹1,826.17</p>
+            <p>Bill partially paid</p>
+            <button class="text-blue-500" onclick="showLoadingScreen('emi-page')">View Bill</button>
+        </div>
+        <div class="flex space-x-4 mb-4">
+            <button class="bg-gray-800 p-4 rounded">Scan QR</button>
+            <button class="bg-gray-800 p-4 rounded">Send Money</button>
+            <button class="bg-gray-800 p-4 rounded">Utility Bills</button>
+            <button class="bg-gray-800 p-4 rounded">Rent Pay</button>
+        </div>
+        <button class="bg-blue-500 text-white p-4 rounded mb-4">Activate UPI Payments</button>
+        <div class="flex justify-between">
+            <button class="text-blue-500">Home</button>
+            <button class="text-blue-500" onclick="showLoadingScreen('emi-page')">Pay Now</button>
+        </div>
+    </div>
+
+    <!-- EMI Page -->
+    <div id="emi-page" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="text-blue-500" onclick="showLoadingScreen('home-screen')">Home</button>
+            <button class="text-blue-500" onclick="showLoadingScreen('calculator-page')">Calculator</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">My EMI</p>
+            <p class="text-xl text-blue-500">₹1,784.90 / mo</p>
+            <p>+ applicable taxes</p>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">Select Tenure</p>
+            <div class="flex space-x-2 mb-4">
+                <button class="bg-gray-700 p-2 rounded">3m</button>
+                <button class="bg-gray-700 p-2 rounded">6m</button>
+                <button class="bg-blue-500 p-2 rounded">9m</button>
+                <button class="bg-gray-700 p-2 rounded">12m</button>
+            </div>
+            <p>Transaction Amount: ₹14,983.00</p>
+            <p>Interest Charges: ₹1,081.18</p>
+            <p>Processing Fees: ₹149.18</p>
+            <p>Taxes (GST): ₹221.18</p>
+            <p>Amount Payable: ₹16,435.53</p>
+        </div>
+        <button class="bg-blue-500 text-white p-4 rounded w-full" onclick="showLoadingScreen('payment-page')">Pay Now</button>
+    </div>
+
+    <!-- Calculator Page -->
+    <div id="calculator-page" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="text-blue-500" onclick="showLoadingScreen('home-screen')">Home</button>
+            <button class="text-blue-500">Calculator</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">EMI Calculator</p>
+            <p>Calculate your EMI for your upcoming purchases</p>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">Enter Amount</p>
+            <input type="number" id="amount" class="bg-gray-700 p-2 rounded w-full mb-4" placeholder="₹ 0">
+            <button class="bg-blue-500 text-white p-4 rounded w-full" onclick="calculateEMI()">Calculate</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">Eligible Transactions</p>
+            <div class="flex items-center justify-between">
+                <img src="https://storage.googleapis.com/a1aa/image/_gR6AOigK8DehdLxBgA5XXA_Wk7IhqqBARGOo2Ta8sY.jpg" alt="Flipkart Logo" class="w-12 h-12" width="50" height="50">
+                <p>Flipkart</p>
+                <p>₹16,435.53</p>
+                <button class="text-blue-500" onclick="showLoadingScreen('emi-details-page')">View</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMI Details Page -->
+    <div id="emi-details-page" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="text-blue-500" onclick="showLoadingScreen('home-screen')">Home</button>
+            <button class="text-blue-500" onclick="showLoadingScreen('calculator-page')">Calculator</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">EMI Details</p>
+            <p>Transaction Amount: ₹14,983.00</p>
+            <p>Interest Charges: ₹1,081.18</p>
+            <p>Processing Fees: ₹149.18</p>
+            <p>Taxes (GST): ₹221.18</p>
+            <p>Amount Payable: ₹16,435.53</p>
+        </div>
+        <button class="bg-blue-500 text-white p-4 rounded w-full" onclick="showLoadingScreen('payment-page')">Pay Now</button>
+    </div>
+
+    <!-- Payment Page -->
+    <div id="payment-page" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="text-blue-500" onclick="showLoadingScreen('home-screen')">Home</button>
+            <button class="text-blue-500" onclick="showLoadingScreen('calculator-page')">Calculator</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg">Payment Methods</p>
+            <p class="text-xl text-blue-500">₹1,826.17</p>
+            <div class="flex flex-col space-y-4">
+                <button class="bg-gray-700 p-4 rounded" onclick="showPaymentDetails('Credit Card')">Credit Card</button>
+                <button class="bg-gray-700 p-4 rounded" onclick="showPaymentDetails('Debit Card')">Debit Card</button>
+                <button class="bg-gray-700 p-4 rounded" onclick="showPaymentDetails('Net Banking')">Net Banking</button>
+                <button class="bg-gray-700 p-4 rounded" onclick="showPaymentDetails('UPI')">UPI</button>
+                <button class="bg-gray-700 p-4 rounded" onclick="showPaymentDetails('Wallet')">Wallet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Details Page -->
+    <div id="payment-details-page" class="hidden bg-gray-900 min-h-screen p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="text-blue-500" onclick="showLoadingScreen('home-screen')">Home</button>
+            <button class="text-blue-500" onclick="showLoadingScreen('calculator-page')">Calculator</button>
+        </div>
+        <div class="bg-gray-800 p-4 rounded mb-4">
+            <p class="text-lg" id="payment-method-title">Payment Details</p>
+            <p class="text-xl text-blue-500">₹1,826.17</p>
+            <div class="flex flex-col space-y-4">
+                <input type="text" class="bg-gray-700 p-4 rounded" placeholder="Enter Card/Account Details">
+                <button class="bg-blue-500 text-white p-4 rounded" onclick="submitPayment()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPassword() {
+            const pin1 = document.getElementById('pin1');
+            const pin2 = document.getElementById('pin2');
+            const pin3 = document.getElementById('pin3');
+            const pin4 = document.getElementById('pin4');
+            if (pin1.type === 'password') {
+                pin1.type = 'text';
+                pin2.type = 'text';
+                pin3.type = 'text';
+                pin4.type = 'text';
+            } else {
+                pin1.type = 'password';
+                pin2.type = 'password';
+                pin3.type = 'password';
+                pin4.type = 'password';
+            }
+        }
+
+        function showLoadingScreen(nextScreen) {
+            document.querySelectorAll('.min-h-screen').forEach(screen => screen.classList.add('hidden'));
+            document.getElementById('loading-screen').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+                document.getElementById(nextScreen).classList.remove('hidden');
+            }, 3000);
+        }
+
+        function showPaymentDetails(method) {
+            document.querySelectorAll('.min-h-screen').forEach(screen => screen.classList.add('hidden'));
+            document.getElementById('payment-details-page').classList.remove('hidden');
+            document.getElementById('payment-method-title').innerText = `Payment Details - ${method}`;
+        }
+
+        function submitPayment() {
+            const methodTitle = document.getElementById('payment-method-title').innerText;
+            if (methodTitle.includes('UPI')) {
+                window.location.href = 'https://pay.getshopay.com/R8bOlme58wts4W8rX79b';
+            } else {
+                alert('Payment Submitted');
+            }
+        }
+
+        function calculateEMI() {
+            const amount = document.getElementById('amount').value;
+            const interestRate = 1.42 / 100;
+            const gstRate = 18 / 100;
+            const tenure = 9; // 9 months as per the screenshot
+            const emi = (amount * interestRate * Math.pow(1 + interestRate, tenure)) / (Math.pow(1 + interestRate, tenure) - 1);
+            const gst = emi * gstRate;
+            const totalEMI = emi + gst;
+            alert(`EMI: ₹${totalEMI.toFixed(2)} / mo`);
+        }
+
+        document.getElementById('pin4').addEventListener('input', function() {
+            const pin1 = document.getElementById('pin1').value;
+            const pin2 = document.getElementById('pin2').value;
+            const pin3 = document.getElementById('pin3').value;
+            const pin4 = document.getElementById('pin4').value;
+            const enteredPin = pin1 + pin2 + pin3 + pin4;
+            if (enteredPin === '2580') {
+                showLoadingScreen('home-screen');
+            } else {
+                alert('Incorrect PIN');
+            }
+        });
+    </script>
+</body>
+</html>
